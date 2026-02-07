@@ -1,0 +1,113 @@
+Full-Stack Coding Assignment – HRMS Lite
+Overview
+You are required to design and develop a lightweight Human Resource Management System (HRMS Lite).
+This assignment is intended to evaluate your end-to-end full-stack development skills, including:
+Frontend development
+Backend API design
+Database modeling & persistence
+Error handling & validations
+Deployment and production readiness
+The focus should be on delivering a clean, stable, and functional application, not on building excessive features.
+Problem Statement
+Build a web-based HRMS Lite application that allows an admin to:
+Manage employee records
+Track daily attendance
+The system should simulate a basic internal HR tool, focusing on essential HR operations with a simple, usable, and professional interface.
+Functional Requirements
+1. Employee Management
+The application should allow the admin to:
+Add a new employee with the following details:
+Employee ID (unique)
+Full Name
+Email Address
+Department
+View a list of all employees
+Delete an employee
+
+2. Attendance Management
+The application should allow the admin to:
+Mark attendance for an employee with:
+Date
+Status (Present / Absent)
+View attendance records for each employee
+Backend & Database Requirements
+Implement RESTful APIs for all functionalities
+Persist data using a database (SQL or NoSQL)
+Perform basic server-side validation
+Required fields
+Valid email format
+Duplicate employee handling
+Handle invalid requests and errors gracefully
+Proper HTTP status codes
+Meaningful error messages
+Constraints & Guidelines
+Assume a single admin user (no authentication required)
+Leave management, payroll, and advanced HR features are out of scope
+Frontend UI should resemble a professional, production-ready website
+Expectations for UI:
+Clean layout
+Proper spacing
+Consistent typography
+Intuitive navigation
+Use reusable components
+Show meaningful UI states:
+Loading
+Empty states
+Error states
+Code should be:
+Readable
+Modular
+Well-structured
+The application should be realistically usable, not just a demo
+Deployment (Mandatory)
+You must deploy the application and share:
+Live Frontend URL
+The application must be publicly accessible
+Hosted Backend API
+Backend must be deployed
+Frontend should be connected to the live backend
+GitHub Repository Link
+Must contain the complete source code (frontend + backend)
+⚠️ Important:
+The deployed application should run without errors using the shared links.
+Submission Requirements
+Please submit the following:
+Live Application URL
+GitHub Repository Link
+README.md file containing:
+Project overview
+Tech stack used
+Steps to run the project locally
+Assumptions or limitations (if any)
+Bonus (Optional)
+You may implement one or more of the following:
+Filter attendance records by date
+Display total present days per employee
+Basic dashboard summary (counts or tables)
+Bonus features will be considered only if the core functionality is complete and stable.
+Recommended Tech Stack (Flexible)
+You are free to choose your stack. Example:
+Frontend
+JavaScript
+React / Angular / Vue
+Backend
+Python: Django / FastAPI
+Database
+MongoDB
+OR
+PostgreSQL / MySQL
+Deployment
+Vercel / Netlify (Frontend)
+Render / Railway /(Backend)
+Time Expectation
+Estimated completion time: within 6-8 hours
+Over-engineering is not required
+A clean, working solution is preferred over extra features
+Important Note
+This assignment is designed to assess practical full-stack development skills.
+Incomplete implementations
+Missing deployments
+Broken links or non-working applications
+may result in the assignment not being evaluated.
+Good Luck!
+We look forward to reviewing your solution 🚀

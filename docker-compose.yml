@@ -1,0 +1,114 @@
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7
+    container_name: sutra-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-password}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE:-hrms}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - hrms-network
+    command: ["mongod", "--quiet", "--setParameter", "logLevel=0", "--setParameter", "diagnosticDataCollectionEnabled=false"]
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: sutra-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - hrms-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    command: redis-server --appendonly yes
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sutra-backend
+    restart: unless-stopped
+    environment:
+      MONGO_URL: mongodb://${MONGO_USERNAME:-admin}:${MONGO_PASSWORD:-password}@mongodb:27017
+      MONGO_DB_NAME: ${MONGO_DATABASE:-hrms}
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your-super-secret-jwt-key-change-this-in-production}
+      JWT_ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 1440
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@sutra.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      ADMIN_FULL_NAME: ${ADMIN_FULL_NAME:-System Administrator}
+      GOOGLE_OAUTH_ENABLED: ${GOOGLE_OAUTH_ENABLED:-false}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://localhost:5173}
+      RATE_LIMIT_PER_MINUTE: ${RATE_LIMIT_PER_MINUTE:-100}
+    ports:
+      - "8000:8000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - hrms-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # React Frontend with Nginx
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sutra-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - hrms-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  mongo_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  hrms-network:
+    driver: bridge
