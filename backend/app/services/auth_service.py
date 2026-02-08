@@ -1,7 +1,4 @@
-"""
-Authentication Service
-Handles user authentication and JWT tokens
-"""
+"""Authentication service - JWT tokens and user management"""
 
 from datetime import datetime, timedelta
 from typing import Optional

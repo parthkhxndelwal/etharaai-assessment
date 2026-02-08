@@ -1,7 +1,4 @@
-"""
-Dashboard API Schemas
-Response models for dashboard endpoints
-"""
+"""Dashboard schemas"""
 
 from typing import Dict
 from pydantic import BaseModel, Field, ConfigDict

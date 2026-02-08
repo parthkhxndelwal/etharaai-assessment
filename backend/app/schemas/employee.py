@@ -1,7 +1,4 @@
-"""
-Employee API Schemas
-Request and response models for employee endpoints
-"""
+"""Employee schemas"""
 
 from datetime import datetime
 from typing import Optional

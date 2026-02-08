@@ -1,7 +1,4 @@
-"""
-Redis Cache Manager
-Async Redis client for caching operations
-"""
+"""Redis cache manager"""
 
 import redis.asyncio as redis
 from typing import Optional, Any

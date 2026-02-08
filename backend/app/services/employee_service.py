@@ -1,7 +1,4 @@
-"""
-Employee Service
-Business logic for employee management with caching
-"""
+"""Employee business logic with caching"""
 
 from datetime import datetime
 from typing import List, Optional

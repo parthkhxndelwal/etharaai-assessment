@@ -1,6 +1,4 @@
-"""
-Sutra HRMS - Main FastAPI Application
-"""
+"""Main FastAPI application"""
 
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
@@ -22,62 +20,39 @@ from .middleware import (
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """
-    Lifespan context manager for startup and shutdown events
-    """
-    # Startup
-    print("🚀 Starting Sutra HRMS Backend...")
-    
-    # Connect to MongoDB
+    print("Starting Sutra Backend...")
     await DatabaseManager.connect()
-    
-    # Create indexes
     await DatabaseManager.create_indexes()
-    
-    # Connect to Redis
     await CacheManager.connect()
-    
-    # Seed admin user
+
     from .services.auth_service import seed_admin_user
     await seed_admin_user()
-    
-    print("✅ Sutra HRMS Backend is ready!")
-    
+    print("Sutra Backend is ready!")
+
     yield
-    
-    # Shutdown
-    print("🛑 Shutting down Sutra HRMS Backend...")
+
     await DatabaseManager.close()
     await CacheManager.close()
-    print("✅ Shutdown complete")
 
 
-# Initialize rate limiter
 limiter = Limiter(key_func=get_remote_address)
 
-# Create FastAPI app
 app = FastAPI(
-    title="Sutra HRMS API",
+    title="Sutra API",
     description="""
-    🕉️ **Sutra HRMS Lite** - A modern, lightweight Human Resource Management System
+    A modern, lightweight Human Resource Management System.
     
     **Features:**
     - Employee Management (CRUD operations)
     - Attendance Tracking
     - Dashboard Analytics
-    - JWT + Google OAuth Authentication
+    - JWT Authentication
     - Redis-powered caching
-    - Rate limiting for security
+    - Rate limiting
     
     **Authentication:**
-    - Use `/api/v1/auth/login` to get JWT token
-    - Click "Authorize" button and enter: `Bearer <your-token>`
-    
-    ---
-    
-    *Built with FastAPI, MongoDB, and Redis*
-    
-    **Jai Shree Ram!** 🚩
+    - Use `/api/v1/auth/login` to get a JWT token
+    - Click "Authorize" and enter: `Bearer <your-token>`
     """,
     version="1.0.0",
     docs_url="/docs",
@@ -85,7 +60,7 @@ app = FastAPI(
     openapi_tags=[
         {
             "name": "Authentication",
-            "description": "JWT and Google OAuth authentication endpoints"
+            "description": "JWT authentication endpoints"
         },
         {
             "name": "Employees",
@@ -103,11 +78,11 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Add rate limiter to app state
+# Rate limiter
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# Configure CORS
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins_list,
@@ -117,7 +92,7 @@ app.add_middleware(
     max_age=3600
 )
 
-# Add custom middleware (order matters - last added runs first)
+# Custom middleware
 add_request_id_middleware(app)
 add_process_time_middleware(app)
 add_security_headers_middleware(app)
@@ -129,7 +104,7 @@ async def health_check():
     """Health check endpoint"""
     return {
         "status": "healthy",
-        "service": "Sutra HRMS API",
+        "service": "Sutra API",
         "version": "1.0.0"
     }
 
@@ -138,35 +113,27 @@ async def health_check():
 async def root():
     """Root endpoint"""
     return {
-        "message": "Welcome to Sutra HRMS API",
+        "message": "Welcome to Sutra API",
         "docs": "/docs",
         "redoc": "/redoc",
         "health": "/health"
     }
 
 
-# Import and include routers (will be added after creating routers)
-# Note: Import here to avoid circular imports
+# Import and include routers
+# (imported here to avoid circular imports)
 def include_routers():
-    """Include all API routers"""
-    try:
-        from .routers import auth, employees, attendance, dashboard
-        
-        app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
-        app.include_router(employees.router, prefix="/api/v1/employees", tags=["Employees"])
-        app.include_router(attendance.router, prefix="/api/v1/attendance", tags=["Attendance"])
-        app.include_router(dashboard.router, prefix="/api/v1/dashboard", tags=["Dashboard"])
-        
-        print("✅ API routers included")
-    except ImportError as e:
-        print(f"⚠️  Some routers not yet created: {e}")
+    from .routers import auth, employees, attendance, dashboard
+
+    app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
+    app.include_router(employees.router, prefix="/api/v1/employees", tags=["Employees"])
+    app.include_router(attendance.router, prefix="/api/v1/attendance", tags=["Attendance"])
+    app.include_router(dashboard.router, prefix="/api/v1/dashboard", tags=["Dashboard"])
 
 
-# Include routers
 include_routers()
 
 
-# Custom exception handlers
 @app.exception_handler(404)
 async def not_found_handler(request, exc):
     """Custom 404 handler"""

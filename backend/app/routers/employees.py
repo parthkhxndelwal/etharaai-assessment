@@ -1,7 +1,4 @@
-"""
-Employee Router
-CRUD endpoints for employee management
-"""
+"""Employee endpoints"""
 
 from typing import Optional
 from fastapi import APIRouter, Depends, status

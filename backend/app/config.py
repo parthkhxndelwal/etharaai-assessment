@@ -1,7 +1,4 @@
-"""
-Configuration Management
-Loads environment variables using pydantic-settings
-"""
+"""Application configuration via environment variables"""
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import List

@@ -1,7 +1,4 @@
-"""
-Attendance Service
-Business logic for attendance tracking
-"""
+"""Attendance business logic"""
 
 from datetime import datetime, date
 from typing import List, Optional

@@ -1,7 +1,4 @@
-"""
-Dashboard Router
-Analytics and summary endpoints
-"""
+"""Dashboard endpoints"""
 
 from typing import List
 from fastapi import APIRouter, Depends

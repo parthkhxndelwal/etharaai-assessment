@@ -1,7 +1,4 @@
-"""
-Attendance API Schemas
-Request and response models for attendance endpoints
-"""
+"""Attendance schemas"""
 
 from datetime import datetime
 from datetime import date as DateType

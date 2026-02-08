@@ -1,7 +1,4 @@
-"""
-Authentication Router
-Endpoints for login and user info
-"""
+"""Authentication endpoints"""
 
 from fastapi import APIRouter, HTTPException, status, Depends, Request
 from slowapi import Limiter

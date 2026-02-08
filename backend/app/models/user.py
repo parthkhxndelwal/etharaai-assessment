@@ -1,7 +1,4 @@
-"""
-User Model
-Represents admin user structure in MongoDB
-"""
+"""User model"""
 
 from datetime import datetime
 from typing import Optional
@@ -16,7 +13,6 @@ class User(BaseModel):
     full_name: str = Field(..., max_length=100, description="Full name")
     role: str = Field(default="admin", max_length=20, description="User role")
     is_active: bool = Field(default=True, description="Active status")
-    google_id: Optional[str] = Field(None, description="Google OAuth ID")
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     

@@ -1,7 +1,4 @@
-"""
-Employee Model
-Represents employee document structure in MongoDB
-"""
+"""Employee model"""
 
 from datetime import datetime
 from typing import Optional

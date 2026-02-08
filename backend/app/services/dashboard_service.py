@@ -1,7 +1,4 @@
-"""
-Dashboard Service
-Business logic for dashboard analytics
-"""
+"""Dashboard analytics service"""
 
 from datetime import date, datetime
 from typing import List, Dict

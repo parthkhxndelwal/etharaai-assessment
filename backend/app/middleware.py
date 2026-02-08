@@ -1,7 +1,4 @@
-"""
-Custom Middleware
-Security headers, request tracking, and timing
-"""
+"""Custom middleware for security headers, request tracking, and timing"""
 
 import time
 import uuid

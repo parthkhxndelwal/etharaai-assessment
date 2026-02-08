@@ -1,7 +1,4 @@
-"""
-Authentication API Schemas
-Request and response models for auth endpoints
-"""
+"""Auth request/response schemas"""
 
 from typing import Optional
 from pydantic import BaseModel, Field, EmailStr, ConfigDict

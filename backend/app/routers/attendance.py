@@ -1,7 +1,4 @@
-"""
-Attendance Router
-Endpoints for attendance tracking
-"""
+"""Attendance endpoints"""
 
 from datetime import date
 from typing import Optional

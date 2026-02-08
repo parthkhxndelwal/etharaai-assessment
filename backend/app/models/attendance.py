@@ -1,7 +1,4 @@
-"""
-Attendance Model
-Represents attendance record structure in MongoDB
-"""
+"""Attendance model"""
 
 from datetime import datetime, date
 from typing import Literal, Optional

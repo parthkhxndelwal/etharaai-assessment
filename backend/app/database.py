@@ -1,7 +1,4 @@
-"""
-MongoDB Database Connection
-Async Motor client for MongoDB operations
-"""
+"""MongoDB async connection using Motor"""
 
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase, AsyncIOMotorCollection
 from typing import Optional

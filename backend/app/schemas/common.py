@@ -1,7 +1,4 @@
-"""
-Common API Response Schemas
-Generic response wrappers and error formats
-"""
+"""Common response schemas"""
 
 from typing import Generic, TypeVar, Optional, Any, List
 from pydantic import BaseModel, Field, ConfigDict
