@@ -61,51 +61,6 @@ async def login(request: Request, login_data: LoginRequest):
     )
 
 
-@router.post("/google", response_model=TokenResponse)
-@limiter.limit(f"{settings.rate_limit_auth_per_minute}/minute")
-async def google_login(request: Request, auth_data: GoogleAuthRequest):
-    """
-    Google OAuth Login
-    
-    Authenticate with Google ID token and receive a JWT token.
-    
-    - **credential**: Google ID token from OAuth response
-    
-    Returns JWT access token and user information.
-    
-    Note: This endpoint is only available if Google OAuth is enabled in configuration.
-    """
-    # Check if Google OAuth is enabled
-    if not settings.google_oauth_enabled:
-        raise HTTPException(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED,
-            detail="Google OAuth is not enabled. Set GOOGLE_OAUTH_ENABLED=true in environment."
-        )
-    
-    # Verify Google token
-    google_info = await verify_google_token(auth_data.credential)
-    
-    # Create or update user
-    user = await create_or_update_google_user(google_info)
-    
-    # Create access token
-    access_token = create_access_token(data={"sub": user["email"]})
-    
-    # Prepare user response
-    user_response = UserResponse(
-        email=user["email"],
-        full_name=user["full_name"],
-        role=user["role"],
-        is_active=user.get("is_active", True)
-    )
-    
-    return TokenResponse(
-        access_token=access_token,
-        token_type="bearer",
-        user=user_response
-    )
-
-
 @router.get("/me", response_model=UserResponse)
 async def get_current_user_info(current_user: dict = Depends(get_current_user)):
     """
