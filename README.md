@@ -4,6 +4,14 @@ A lightweight Human Resource Management System built for the Ethara.AI assessmen
 
 **Sutra** (Sanskrit: सूत्र) means "thread", symbolizing the interconnected nature of organizational management.
 
+View here:
+
+| Service | URL |
+|---------|-----|
+| Frontend | https://sutra.parth.engineer |
+| Backend API | https://sutra-8bv8.onrender.com |
+| Swagger Docs | https://sutra-8bv8.onrender.com/docs |
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -27,6 +35,8 @@ A lightweight Human Resource Management System built for the Ethara.AI assessmen
 - **Security** - CORS, security headers, bcrypt password hashing
 
 ## Running Locally with Docker
+ 
+The application is containerised. So you can simply run it with docker. If docker isn't installed, you can choose to proceed without it.
 
 ### Prerequisites
 
