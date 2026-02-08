@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback, ReactNode, useMemo } from 'react'
-import { attendanceApi, AttendanceRecord, AttendanceCreate, AttendanceUpdate } from '../api/attendanceApi'
+import { attendanceApi, AttendanceRecord, AttendanceCreate, AttendanceUpdate } from '@/api/attendanceApi'
 
 interface AttendanceContextType {
   records: AttendanceRecord[]

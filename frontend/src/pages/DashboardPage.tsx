@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { dashboardApi, DashboardSummary, EmployeeAttendanceSummary } from '../api/dashboardApi'
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
+import { dashboardApi, DashboardSummary, EmployeeAttendanceSummary } from '@/api/dashboardApi'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Table,
   TableBody,
@@ -8,11 +8,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../components/ui/table'
-import { Badge } from '../components/ui/badge'
-import { LoadingSpinner } from '../components/LoadingSpinner'
-import { ErrorState } from '../components/ErrorState'
-import { formatPercentage } from '../utils/formatters'
+} from '@/components/ui/table'
+import { Badge } from '@/components/ui/badge'
+import { LoadingSpinner } from '@/components/LoadingSpinner'
+import { ErrorState } from '@/components/ErrorState'
+import { formatPercentage } from '@/utils/formatters'
 
 export const DashboardPage = () => {
   const [summary, setSummary] = useState<DashboardSummary | null>(null)
