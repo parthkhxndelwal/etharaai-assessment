@@ -1,6 +1,6 @@
 """
 Authentication Router
-Endpoints for login, Google OAuth, and user info
+Endpoints for login and user info
 """
 
 from fastapi import APIRouter, HTTPException, status, Depends, Request
@@ -8,12 +8,10 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 
 from ..config import settings
-from ..schemas.auth import LoginRequest, GoogleAuthRequest, TokenResponse, UserResponse
+from ..schemas.auth import LoginRequest, TokenResponse, UserResponse
 from ..services.auth_service import (
     authenticate_user,
     create_access_token,
-    verify_google_token,
-    create_or_update_google_user,
     get_current_user
 )
 

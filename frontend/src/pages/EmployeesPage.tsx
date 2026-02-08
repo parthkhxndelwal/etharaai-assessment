@@ -389,11 +389,11 @@ export const EmployeesPage = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <Label className="text-muted-foreground">Created At</Label>
-                  <p className="text-sm">{new Date(selectedEmployee.created_at).toLocaleString()}</p>
+                  <p className="text-sm">{new Date(selectedEmployee.created_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
                 </div>
                 <div className="space-y-1">
                   <Label className="text-muted-foreground">Updated At</Label>
-                  <p className="text-sm">{new Date(selectedEmployee.updated_at).toLocaleString()}</p>
+                  <p className="text-sm">{new Date(selectedEmployee.updated_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
                 </div>
               </div>
             </div>

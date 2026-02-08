@@ -5,10 +5,6 @@ export interface LoginRequest {
   password: string
 }
 
-export interface GoogleAuthRequest {
-  id_token: string
-}
-
 export interface TokenResponse {
   success: boolean
   access_token: string
@@ -29,14 +25,6 @@ export const authApi = {
    */
   login: async (credentials: LoginRequest): Promise<TokenResponse> => {
     const response = await apiClient.post('/api/v1/auth/login', credentials)
-    return response.data
-  },
-
-  /**
-   * Login with Google OAuth
-   */
-  googleLogin: async (data: GoogleAuthRequest): Promise<TokenResponse> => {
-    const response = await apiClient.post('/api/v1/auth/google', data)
     return response.data
   },
 

@@ -27,11 +27,6 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 1440  # 24 hours
     
-    # Google OAuth
-    google_oauth_enabled: bool = False
-    google_client_id: str = ""
-    google_client_secret: str = ""
-    
     # Admin User
     admin_email: str = "admin@sutra.com"
     admin_password: str = "admin123"

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useMemo, useCallback } from 'react'
-import { authApi, User, LoginRequest, GoogleAuthRequest } from '@/api/authApi'
+import { authApi, User, LoginRequest } from '@/api/authApi'
 
 interface AuthContextType {
   user: User | null
@@ -7,7 +7,6 @@ interface AuthContextType {
   isAuthenticated: boolean
   isLoading: boolean
   login: (credentials: LoginRequest) => Promise<void>
-  googleLogin: (data: GoogleAuthRequest) => Promise<void>
   logout: () => void
   checkAuth: () => Promise<void>
 }
@@ -64,14 +63,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('hrms_user', JSON.stringify(response.user))
   }, [])
 
-  const googleLogin = useCallback(async (data: GoogleAuthRequest) => {
-    const response = await authApi.googleLogin(data)
-    setToken(response.access_token)
-    setUser(response.user)
-    localStorage.setItem('hrms_token', response.access_token)
-    localStorage.setItem('hrms_user', JSON.stringify(response.user))
-  }, [])
-
   const logout = useCallback(() => {
     setToken(null)
     setUser(null)
@@ -86,11 +77,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       isAuthenticated,
       isLoading,
       login,
-      googleLogin,
       logout,
       checkAuth,
     }),
-    [user, token, isAuthenticated, isLoading, login, googleLogin, logout, checkAuth]
+    [user, token, isAuthenticated, isLoading, login, logout, checkAuth]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

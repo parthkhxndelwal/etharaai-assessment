@@ -24,21 +24,6 @@ class LoginRequest(BaseModel):
     )
 
 
-class GoogleAuthRequest(BaseModel):
-    """Schema for Google OAuth login"""
-    
-    credential: str = Field(..., description="Google ID token from OAuth response")
-    
-    model_config = ConfigDict(
-        extra='forbid',
-        json_schema_extra={
-            "example": {
-                "credential": "eyJhbGciOiJSUzI1NiIsImtpZCI6..."
-            }
-        }
-    )
-
-
 class TokenResponse(BaseModel):
     """Schema for authentication token response"""
     
