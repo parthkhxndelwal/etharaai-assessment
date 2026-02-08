@@ -9,9 +9,9 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-
+    
     /* Bundler mode */
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
