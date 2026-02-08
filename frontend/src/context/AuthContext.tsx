@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useMemo, useCallback } from 'react'
-import { authApi, User, LoginRequest, GoogleAuthRequest } from '@/api/authApi'
+import { authApi, User, LoginRequest, GoogleAuthRequest } from '../api/authApi'
 
 interface AuthContextType {
   user: User | null

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useEmployees } from '@/context/EmployeeContext'
-import { Employee, EmployeeCreate } from '@/api/employeeApi'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { useEmployees } from '../context/EmployeeContext'
+import { Employee, EmployeeCreate } from '../api/employeeApi'
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
+import { Button } from '../components/ui/button'
+import { Input } from '../components/ui/input'
+import { Label } from '../components/ui/label'
 import {
   Dialog,
   DialogContent,
@@ -12,14 +12,14 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
+} from '../components/ui/dialog'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '../components/ui/select'
 import {
   Table,
   TableBody,
@@ -27,15 +27,15 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { Badge } from '@/components/ui/badge'
-import { LoadingSpinner } from '@/components/LoadingSpinner'
-import { ErrorState } from '@/components/ErrorState'
-import { EmptyState } from '@/components/EmptyState'
-import { ConfirmDialog } from '@/components/ConfirmDialog'
+} from '../components/ui/table'
+import { Badge } from '../components/ui/badge'
+import { LoadingSpinner } from '../components/LoadingSpinner'
+import { ErrorState } from '../components/ErrorState'
+import { EmptyState } from '../components/EmptyState'
+import { ConfirmDialog } from '../components/ConfirmDialog'
 import { toast } from 'sonner'
-import { DEPARTMENTS } from '@/utils/constants'
-import { validateEmail, validateEmployeeId, validateRequired } from '@/utils/validators'
+import { DEPARTMENTS } from '../utils/constants'
+import { validateEmail, validateEmployeeId, validateRequired } from '../utils/validators'
 
 export const EmployeesPage = () => {
   const { employees, loading, error, fetchEmployees, addEmployee, removeEmployee } = useEmployees()

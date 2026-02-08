@@ -1,6 +1,6 @@
-import { useAuth } from '@/context/AuthContext'
-import { Button } from '@/components/ui/button'
-import { getInitials } from '@/utils/formatters'
+import { useAuth } from '../context/AuthContext'
+import { Button } from './ui/button'
+import { getInitials } from '../utils/formatters'
 
 export const Header = () => {
   const { user, logout } = useAuth()

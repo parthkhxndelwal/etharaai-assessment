@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback, ReactNode, useMemo } from 'react'
-import { employeeApi, Employee, EmployeeCreate, EmployeeUpdate } from '@/api/employeeApi'
+import { employeeApi, Employee, EmployeeCreate, EmployeeUpdate } from '../api/employeeApi'
 
 interface EmployeeContextType {
   employees: Employee[]
