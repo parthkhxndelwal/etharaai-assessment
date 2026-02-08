@@ -2,7 +2,7 @@
 
 A lightweight Human Resource Management System built for the Ethara.AI assessment.
 
-**Sutra** (Sanskrit: सूत्र) means "thread" — symbolizing the interconnected nature of organizational management.
+**Sutra** (Sanskrit: सूत्र) means "thread", symbolizing the interconnected nature of organizational management.
 
 ## Tech Stack
 
@@ -17,20 +17,20 @@ A lightweight Human Resource Management System built for the Ethara.AI assessmen
 
 ## Features
 
-- **Employee Management** — Add, view, update, and delete employee records
-- **Attendance Tracking** — Mark daily attendance (Present / Absent / Half Day / Leave) and filter by date/status
-- **Dashboard** — Summary cards, department distribution, per-employee attendance stats
-- **UI States** — Loading spinners, empty states, error states with retry
-- **Validation** — Client-side and server-side (email format, required fields, duplicate handling)
-- **Caching** — Redis-backed response caching for performance
-- **Rate Limiting** — Configurable per-endpoint rate limits
-- **Security** — CORS, security headers, bcrypt password hashing
+- **Employee Management** - Add, view, update, and delete employee records
+- **Attendance Tracking** - Mark daily attendance (Present / Absent / Half Day / Leave) and filter by date/status
+- **Dashboard** - Summary cards, department distribution, per-employee attendance stats
+- **UI States** - Loading spinners, empty states, error states with retry
+- **Validation** - Client-side and server-side (email format, required fields, duplicate handling)
+- **Caching** - Redis-backed response caching for performance
+- **Rate Limiting** - Configurable per-endpoint rate limits
+- **Security** - CORS, security headers, bcrypt password hashing
 
 ## Running Locally with Docker
 
 ### Prerequisites
 
-- Docker & Docker Compose
+- Docker & Docker Compose (Open Docker Desktop app after installation, to run the docker daemon)
 
 ### Steps
 
@@ -105,33 +105,33 @@ npm run dev
 ## API Endpoints
 
 ### Auth
-- `POST /api/v1/auth/login` — Login with email/password
-- `GET  /api/v1/auth/me` — Get current user
+- `POST /api/v1/auth/login` - Login with email/password
+- `GET  /api/v1/auth/me` - Get current user
 
 ### Employees
-- `POST   /api/v1/employees` — Create employee
-- `GET    /api/v1/employees` — List employees (with search/filter)
-- `GET    /api/v1/employees/{id}` — Get employee
-- `PUT    /api/v1/employees/{id}` — Update employee
-- `DELETE /api/v1/employees/{id}` — Delete employee
+- `POST   /api/v1/employees` - Create employee
+- `GET    /api/v1/employees` - List employees (with search/filter)
+- `GET    /api/v1/employees/{id}` - Get employee
+- `PUT    /api/v1/employees/{id}` - Update employee
+- `DELETE /api/v1/employees/{id}` - Delete employee
 
 ### Attendance
-- `POST   /api/v1/attendance` — Mark attendance
-- `GET    /api/v1/attendance` — List records (with date/status filters)
-- `GET    /api/v1/attendance/{employee_id}` — Get employee attendance
-- `PUT    /api/v1/attendance/{id}` — Update record
-- `DELETE /api/v1/attendance/{id}` — Delete record
+- `POST   /api/v1/attendance` - Mark attendance
+- `GET    /api/v1/attendance` - List records (with date/status filters)
+- `GET    /api/v1/attendance/{employee_id}` - Get employee attendance
+- `PUT    /api/v1/attendance/{id}` - Update record
+- `DELETE /api/v1/attendance/{id}` - Delete record
 
 ### Dashboard
-- `GET /api/v1/dashboard/summary` — Overview stats
-- `GET /api/v1/dashboard/attendance-summary` — Per-employee breakdown
+- `GET /api/v1/dashboard/summary` - Overview stats
+- `GET /api/v1/dashboard/attendance-summary` - Per-employee breakdown
 
 ## Assumptions & Limitations
 
 - Single admin user (no multi-role system)
 - One attendance record per employee per day (enforced by DB unique index)
 - All timestamps stored in UTC
-- Authentication is a bonus feature — the spec says "no authentication required" but JWT is implemented for production readiness
+- Authentication is a bonus feature - the spec says "no authentication required" but JWT is implemented for production readiness
 - Cache TTL: Dashboard 30s, employee lists 60s, individual records 300s
 
 ## Deployment

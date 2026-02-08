@@ -24,8 +24,17 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         if not request.url.hostname in ["localhost", "127.0.0.1"]:
             response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
         
-        # Content Security Policy
-        response.headers["Content-Security-Policy"] = "default-src 'self'"
+        # Content Security Policy - relaxed for Swagger/ReDoc docs pages
+        if request.url.path in ("/docs", "/redoc", "/openapi.json"):
+            response.headers["Content-Security-Policy"] = (
+                "default-src 'self'; "
+                "img-src 'self' https://fastapi.tiangolo.com data:; "
+                "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+                "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+                "worker-src 'self' blob:"
+            )
+        else:
+            response.headers["Content-Security-Policy"] = "default-src 'self'"
         
         return response
 
